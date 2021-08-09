@@ -3,7 +3,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 
-
+var mongoose = require('mongoose');
 const express = require("express");
 const articles = require("./dummydata/articles");
 const path = require("path");
@@ -32,8 +32,8 @@ const ArticleSchema = new Schema({
 const Article = mongoose.model('Article', ArticleSchema);
 
 const data = {
-    id = '2',
-    title = 'gdfgdf'
+    id: '2',
+    title: 'gdfgdf'
 };
 
 const newArticle = new Article(data);

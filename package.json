@@ -10,7 +10,7 @@
     "heroku-postbuild": "npm run install-client && npm run build",
     "heroku-start": "node server.js",
     "start": "nodemon backend/server.js",
-    "client": "cd frontend && npm heroku-start"
+    "client": "cd frontend && npm start"
   },
   "author": "Swapnil",
   "license": "ISC",
