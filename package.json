@@ -8,8 +8,9 @@
     "build": "cd frontend && npm run build",
     "install-client": "cd frontend && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "node backend/server.js",
-    "client": "cd frontend && npm start"
+    "heroku-start": "node server.js",
+    "start": "nodemon backend/server.js",
+    "client": "cd frontend && npm heroku-start"
   },
   "author": "Swapnil",
   "license": "ISC",
