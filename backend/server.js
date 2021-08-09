@@ -9,63 +9,42 @@ const articles = require("./dummydata/articles");
 const path = require("path");
 const server = express();
 
-mongoose
-  .connect(
-    process.env.MONGO_URL,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .then(() => console.log("MongoDB has been connected"))
-  .catch((err) => console.log(err));
-
-
-// Step 1:
-app.use(express.static(path.resolve(__dirname, "./frontend/build")));
-// Step 2:
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./frontend/build", "index.html"));
+mongoose.connect(process.env.MONGO_URL || 'mongodb+srv://SwappyK:SwappyK123@mern-pagination.dwzjs.mongodb.net/mern-pagination?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
 
+mongoose.connection.on('connected', () =>{
+    console.log('Mongoose is connected!!!!')
+});
 
+const Schema = mongoose.Schema;
+const ArticleSchema = new Schema({
+    id: String,
+    title: String,
+    //authors: String,
+    //source: String,
+    //pubyear: String,
+    //doi: String,
+    //claim_evidence: String,
+});
 
-// mongoose.connect(process.env.MONGO_URL || 'mongodb+srv://SwappyK:SwappyK123@mern-pagination.dwzjs.mongodb.net/mern-pagination?retryWrites=true&w=majority', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
+const Article = mongoose.model('Article', ArticleSchema);
 
-// mongoose.connection.on('connected', () =>{
-//     console.log('Mongoose is connected!!!!')
-// });
+const data = {
+    id: '2',
+    title: 'gdfgdf'
+};
 
-// const Schema = mongoose.Schema;
-// const ArticleSchema = new Schema({
-//     id: String,
-//     title: String,
-//     //authors: String,
-//     //source: String,
-//     //pubyear: String,
-//     //doi: String,
-//     //claim_evidence: String,
-// });
+const newArticle = new Article(data);
 
-// const Article = mongoose.model('Article', ArticleSchema);
-
-// const data = {
-//     id: '2',
-//     title: 'gdfgdf'
-// };
-
-// const newArticle = new Article(data);
-
-// newArticle.save((error) => {
-//     if (error) {
-//         console.log('something went wrong');
-//     } else {
-//         console.log('saved');
-//     }
-// });
+newArticle.save((error) => {
+    if (error) {
+        console.log('something went wrong');
+    } else {
+        console.log('saved');
+    }
+});
 
 
 server.get('/', (req,res) =>{
