@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb+srv://SwappyK:SwappyK123@mern
     useUnifiedTopology: true
 });
 
-mongoose.connection.config('connected', () =>{
+mongoose.connection.on('connected', () =>{
     console.log('Mongoose is connected!!!!')
 });
 
